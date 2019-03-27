@@ -22,7 +22,13 @@ namespace DAL
             modelBuilder.Entity<LiveMessage>().HasKey(x => x.Id);
             modelBuilder.Entity<Fault>().HasKey(x => x.Id);
 
-            modelBuilder.Entity<Person>().HasMany(x => x.Faults);
+            modelBuilder.Entity<Person>()
+                .HasMany(x => x.Faults)
+                .WithRequired(x=>x.Person);
+            modelBuilder.Entity<Person>()
+                .HasMany(x => x.LiveMessages)
+                .WithOptional(x => x.Person);
+        
 
             base.OnModelCreating(modelBuilder);
         }
