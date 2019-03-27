@@ -9,9 +9,22 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class ServisContext :IdentityDbContext<Person>
-    {  
+    public class ServisContext : IdentityDbContext<Person>
+    {
+        public ServisContext():base ("ServisContext")
+        {
+          
+        }
+        public virtual DbSet<LiveMessage> LiveMessages { get; set; }
         public virtual DbSet<Fault> Faults { get; set; }
-        public virtual DbSet<Message> Messages { get; set; }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<LiveMessage>().HasKey(x => x.Id);
+            modelBuilder.Entity<Fault>().HasKey(x => x.Id);
+
+            modelBuilder.Entity<Person>().HasMany(x => x.Faults);
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

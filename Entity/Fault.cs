@@ -17,7 +17,7 @@ namespace Entity
         public string ImageURL { get; set; }
         public string Message { get; set; }
         public DateTime RequestDate { get; set; }
-
+        public virtual Person Person { get; set; }
         public Fault()
         {
             RequestDate = DateTime.Now;

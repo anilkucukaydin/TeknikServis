@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Entity
 {
-    class Message : IEntity
+    public class LiveMessage : IEntity
     {
         public int Id { get; set; }
         public int MessageFrom { get; set; }
@@ -15,10 +15,12 @@ namespace Entity
         public string Text { get; set; }
         public DateTime SendDate { get; set; }
         public string ImageURL { get; set; }
-        public Message()
+        public virtual Person Person { get; set; }
+        public LiveMessage()
         {
             SendDate = DateTime.Now;
         }
+       
 
     }
 }
